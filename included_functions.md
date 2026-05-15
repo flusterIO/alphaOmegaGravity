@@ -8,6 +8,8 @@
 | $\alpha$, $2-\alpha$, $1 \pm \alpha$                      | `alpha`                          | $0.025\%$ <br/> $0.0034\%$ (solar) |
 | Earth's cosmological velocity as a function of $\alpha$   | `vbarAlphaEquivalence`           | $0.08\%$                           |
 
+> Don't forget the `describe` function that generates a similar note at runtime, using CODATA and IAU values from the Scipy and Astropy packages.
+
 ## The lighthouse & the Clocktower
 
 > An opening thought experiment
