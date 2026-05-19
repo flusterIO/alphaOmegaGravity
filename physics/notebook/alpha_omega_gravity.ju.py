@@ -48,6 +48,12 @@ This gives the following relationship:
 $$
 \frac{d}{dR} g \approx \beta^2_{\text{cosmological}} \approx (\alpha (2 - \alpha))^3 \approx 3.07 \times 10^{-7} ~ \text{m}
 $$
+
+And a final orbital approximation of:
+
+$$
+\frac{\sqrt[3]{GM_\odot}}{v_{\text{orbit}}} = \alpha \frac{\mathbf{AU}}{R_\oplus} \pm 0.25\%
+$$
 # %%
 
 import scipy.constants as spc
@@ -115,6 +121,7 @@ earthRadiusMean: float = 6371000
     n,
     e,
     c,
+        au,
     me,
     m_tau,
     m_plank,
@@ -128,6 +135,8 @@ earthRadiusMean: float = 6371000
     lp,
     gamma,
     vSolar,
+    vOrbit,
+    mSolar,
     rGalactic,
     mSolarCircle
 ) = smp.symbols(
@@ -143,6 +152,7 @@ earthRadiusMean: float = 6371000
         "n",
         "e",
         "c",
+        r"\mathbf{AU}",
         r"m_{e}",
         r"m_{\tau}",
         r"m_p",
@@ -156,6 +166,8 @@ earthRadiusMean: float = 6371000
         r"\l_{p}",
         r"\gamma",
         r"v_{\odot}",
+        r"v_{\text{orbit}}",
+        r"M_{\odot}",
         r"r_{\text{galactic}}",
         r"m_{\text{sc}}",
     ]
@@ -178,6 +190,8 @@ subs = [
     [eo, cd.eps0.base.tolist()],
     [e, cd.e.base.tolist()],
     [h, cd.h.value.tolist()],
+    [au, spc.au],
+    [mSolar, ac.M_sun.value.tolist()],
 ]
 
 subsSolar = [[R, ac.R_sun.base.tolist()], [M, ac.M_sun.base.tolist()], [vSolar, solarObitalVelocity], [mSolarCircle, solarCircleEnclosedMass]]
@@ -192,6 +206,7 @@ expand = [
     [m_plank, _mass_plank],
     [lp, _lp],
     [hbar, h / (smp.pi * 2)],
+    [vOrbit, vOrbitApproximation()]
 ]
 
 
@@ -253,6 +268,12 @@ def massDensityEquivalence():
     b = massDensityTraditional()
     return [a, b]
 
+def vOrbitApproximation():
+    return 2 * smp.pi * au / (365.25 * spc.day)
+
+def solarMetricVelocity():
+    return (G * mSolar)**smp.Rational(1, 3)
+
 def galacticRadiusPolynomial():
     return vSolar**2 * rGalactic**4 - (2 * G * mSolarCircle * rGalactic**3) - (G * mSolarCircle)**2
 
@@ -283,13 +304,21 @@ currentEquivDiff = abs(percentDiff(currentEquivalent().subs(subs), spc.golden_ra
 alphaSolarDiff = percentDiff(spc.alpha + 1, _alphaSolar[0].subs(subsSolar).subs(subs))
 rotDiff = percentDiff(rotV, spinorSubbed * electricDivergenceSubbed)
 omegaAlphaDiff = percentDiff(alphaFactor.subs([[alpha, spc.alpha]]), omegaSubbed.evalf())
-
+solarMetVRatio = (solarMetricVelocity() / vOrbit).subs(expand).subs(subs).evalf()
+auRRatio = spc.alpha * (au / R).subs(subs)
+auRRatioPercentDiff = percentDiff(auRRatio, solarMetVRatio)
+fAlphaOmega = ((1 / (2 - alpha) * omega()) - alpha).subs(expand)
+hsols = smp.solve(fAlphaOmega, h)
+alphaOmegaDiff1 = percentDiff(hsols[1].subs(subs), spc.h)
+alphaOmegaDiff = percentDiff(hsols[0].subs(subs), spc.h * (spc.alpha / (2 - spc.alpha)))
 
 # %%
 
+massDensityEquivTitle = "Φ mass density approximation"
+cosmoVelTitle = "cosmological velocity from local gravitational parameters"
 df = pd.DataFrame([ 
     {
-        "derivation": "cosmological velocity from local gravitational parameters",
+        "derivation": cosmoVelTitle,
         "function": "vbarCosmological",
         "% error": "Difficult to assess"
     },
@@ -319,6 +348,11 @@ df = pd.DataFrame([
         "% error": abs(omegaAlphaDiff)
     },
     {
+        "derivation": "α (orbital velocity)",
+        "function": "solarMetricVelocity, vOrbit",
+        "% error": abs(auRRatioPercentDiff)
+    },
+    {
         "derivation": "α (from derived velocity)",
         "function": "vbarAlphaEquivalence",
         "% error": abs(vbarAlphaDiff)
@@ -329,7 +363,17 @@ df = pd.DataFrame([
         "% error": abs(currentEquivDiff)
     },
     {
-        "derivation": "Φ mass density approximation",
+        "derivation": "h from α",
+        "function": "omega, alpha",
+        "% error": abs(alphaOmegaDiff1)
+    },
+    {
+        "derivation": "h/(2 - α) from ω",
+        "function": "omega, alpha",
+        "% error": abs(alphaSolarDiff)
+    },
+    {
+        "derivation": massDensityEquivTitle,
         "function": "massDensityEquivalence",
         "% error": abs(rhoDiff)
     },
@@ -343,8 +387,16 @@ Keep in mind, for several of these quantities we could be picky and choose a spe
 
 # %%
 
-# Removes just the last element, our mass density approximation since we know it's just an approximation, using approximations.
-withoutRho = df["% error"].iloc[1:df["% error"].__len__() - 1]
+# Removes functions that are known to be merely approximations, using approximations.
+# The point of this notebook is not to derive precise functions, but rather to derive a
+# geometry of time itself, which can be better understood by studying these approximations.
+filter_approximation_derivations = [
+    massDensityEquivTitle,
+    # Remove the cosmological velocity because it's error is a string.
+    cosmoVelTitle 
+]
+
+withoutApproximations = df[~df['derivation'].isin(filter_approximation_derivations)]
 
 
 # %%
@@ -352,8 +404,7 @@ withoutRho = df["% error"].iloc[1:df["% error"].__len__() - 1]
 print_md(f""" 
 Or a combined average error of {(df["% error"].iloc[1:].mean()):.4f}%.
 
-We can do even better if we remove the quantities that we assume are merely approximations, and not completely accurate functions. We then find an average error of {(withoutRho.sum() / withoutRho.__len__()):.4f}%. Not quite within observation error for some of the electromagnetic properties, but more than enough to establish a relationship between gravity and electromagnetism.
-
+We can do even better if we remove the quantities that we assume are merely approximations, and not completely accurate functions. We then find an average error of {(withoutApproximations['% error'].sum() / withoutApproximations.__len__()):.4f}%. Not quite within observation error for some of the electromagnetic properties, but more than enough to establish a relationship between gravity and electromagnetism.
 
 """)
 
@@ -449,7 +500,9 @@ $$
 \\overbrace{{\\alpha}}^{{dt}} = \\underbrace{{\\frac{{1}}{{2 - \\alpha}}}}_{{1/dx}} \\overbrace{{\\sqrt[3]{{2\\frac{{GM_\\oplus}}{{R_\\oplus^3}}}}}}^{{ds}}
 $$
 
-$\\alpha$ is _not_ a constant in itself, and it needs to stop being viewed as such. It's comprised of other constants, each with it's own properties and antagonists, giving $\\alpha$ different units in different contexts.
+$\\alpha$ is _not_ a constant in itself, and it needs to stop being viewed as such. It's comprised of other constants, each with it's own properties and antagonists, giving $\\alpha$ different units in different contexts. 
+
+If this model is correct and space is quantized such that there exists $n$ number of some length quantity $\\mathit{{l}}$ between $p_1$ and $p_2$, then $h \\to h \\gamma$ in the coordinate system of the observer in motion, along with proportionally dilating $\\mu_0$ and $\\epsilon_0$. This dilation gives $\\alpha$ units of $\\text{{distance}}/\\text{{time}}$.
 
 Consider the function for our Sun, where our 'Spinor' approximation limits at:
 
@@ -477,7 +530,7 @@ print_md(
 
 Riddle me this... how can $c$ be constant in-between reference frames, when it's a time dependent quantity, time dilates, and it's constant _in_ each reference frame? This logic is self defeating. _If_ $c$ is of an equivalent magnitude ***in*** each reference frame, than it ***must*** dilate between reference frames to accomodate the shift in unit magnitude. If a quantity has a magnitude of $n$ meters per second in both reference frames, but a second itself has a different magnitude, then that quantity is _not_ constant. It is this type of behavior that is masked by the very use of time as a mathematical tool. While perceiving a Universe without time may be diffcult, there is not a single argument for time as a physically meaningful quantity. Not one experiment has ever measured it directly, we don't even know it exists, and the theory I'm called a crackpot for refuting ***depends*** on the dilation of this quantity. We can do better.
 
-If we truly wanted to dilate time, we should dilate both $t \\to t \\gamma$ and $v \\to v ~ 1/\\gamma$ in the $d=vt\gamma$ equivalence since _both_ have time components, but we don't. To make the math fit, we only dilate the independent time component in the coordinate system of the observer in motion, leaving the velocity's magnitude unchanged by this dilation. It is not enough to blast a dimensionless scalar at an entire equation and assume that everything dilates proportionally.
+If we truly wanted to dilate time, we should dilate both $t \\to t \\gamma$ and $v \\to v ~ 1/\\gamma$ in the $d=vt\\gamma$ equivalence since _both_ have time components, but we don't. To make the math fit, we only dilate the independent time component in the coordinate system of the observer in motion, leaving the velocity's magnitude unchanged by this dilation. It is not enough to blast a dimensionless scalar at an entire equation and assume that everything dilates proportionally.
 
 Let's go back to grade school. Imagine a set of parallel lines, $A$, $B$ and $C$ where you have $B$ 'things' per $C$. If $\\gamma$ effects $A$ and $C$, and $d = An\\frac{{B}}{{C}}$ that's to say ($d = tv \\frac{{\\gamma}}{{\\gamma}}$), then $d$ remains unchanged. This is all well and good, giving rise the constant 4-vecs in special relativity, but this is objectively _not_ what we observe. 
 
@@ -526,12 +579,12 @@ $$
 This is our rotational velocity to within:
 
 $$
-\Gamma \delta c = \\frac{{2 \\pi R_\\oplus}}{{86400}} \\pm {rotDiff:.4f}\\%
+\\Gamma \\delta c = \\frac{{2 \\pi R_\\oplus}}{{86400}} \\pm {rotDiff:.4f}\\%
 $$
 
 And a direct, mechanistic link to why our 'time' dilates at the poles due to gravity at an almost identical rate to that of the equator due to the additional rotational velocity. Earth is *not* special, but these quantities are *not* constant.
 
-This is off by ${rotV - (spinorSubbed * electricDivergenceSubbed):.5f}$ meters... well within measurement error.
+This is off by ${rotV - (spinorSubbed * electricDivergenceSubbed):.5f}$ meters on a radius the size of Earth's... well within measurement error.
 
 > Note here that our polar radius was used to avoid the influence of centripital force.
 
@@ -722,6 +775,76 @@ Time is nothing but cummulative motion and rest... a useful mathematical tool th
 
          """)
 
+
+# %% 
+print_md(f""" 
+## Orbital Velocity $\\alpha$ symmetry
+
+Consider the radius independent magnitude of our proposed spatial dilation for the prominent body in our system the Sun.
+
+$$
+v_g = {smp.latex(solarMetricVelocity())}
+$$
+
+Dividing this by our orbital velocity gives:
+
+$$
+{smp.latex(solarMetricVelocity() / vOrbit)} = {solarMetVRatio}
+$$
+
+As this compares this theoretical metric velocity to our observed orbital velocity, we should then consider the ratio of distances:
+
+$$
+\\frac{{\\mathbf{{AU}}}}{{R_\\oplus}} = {(au / R).subs(subs)}
+$$
+
+Or
+
+$$
+\\alpha \\frac{{\\mathbf{{AU}}}}{{R_\\oplus}} = {auRRatio}
+$$
+
+This is a {auRRatioPercentDiff:.3f}% percent difference.
+    """)
+
+
+# %%
+
+# %%
+print_md(f""" 
+## $p=mv$
+
+Consider Plank's constant $h$, the momentum carrying quantity for a massless photon.
+
+$$
+E = \\frac{{hc}}{{\\lambda}}
+$$
+
+If, as derived above, we assert the following:
+
+$$
+\\alpha = \\frac{{\\omega}}{{2 - \\alpha}} = {smp.latex(omega() / (2 - alpha))}
+$$
+
+Then we find:
+
+$$
+h^\\prime = {smp.latex(hsols[0].subs(subs))}, {smp.latex(hsols[1].subs(subs))}
+$$
+
+Or,
+
+$$
+h^\\prime = h \\pm {alphaOmegaDiff1}\\%
+$$
+And
+
+$$
+h^\\prime = h \\frac{{\\alpha}}{{2 - \\alpha}} \\pm {alphaOmegaDiff}
+$$
+
+Giving now our _second_ recipricol function giving $\\alpha$ in terms of gravitational parameters.
+    """)
 
 # %% [md]
 
