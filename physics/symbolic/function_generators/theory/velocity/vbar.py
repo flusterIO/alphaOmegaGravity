@@ -27,3 +27,19 @@ def vbarCosmological():
 
 def vbarKinematic() -> smp.Pow:
     return c * smp.sqrt(1 - 1 / (1 + smp.Rational(1, 2) * G * M / R**3) ** 2)
+
+
+def vbarAlphaEquivalence():
+    """
+    Returns
+    $$
+    (v_0 / c)^2 \\approx (\\alpha (2 - \\alpha))^3
+    $$
+
+    This demonstrates that our velocity _through_ space is linearly proportional to the dilation _of_ space,
+    again demonstrating that time and cosmic inflation are the same process as observed from different reference frames,
+    once this divergent geometry is accounted for.
+    """
+    a = vbarCosmological() ** 2 / c**2
+    b = (alpha * (2 - alpha)) ** 3
+    return [a, b]

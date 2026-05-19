@@ -5,4 +5,9 @@ cmbRelativeVelocities = [
     1.228 * 10**-3 * cd.c,
     1.231 * 10**-3 * cd.c,
     1.234 * 10**-3 * cd.c,
-] 
+]
+
+
+earthRadiusPolar: float = 6356752
+
+earthRadiusMean: float = 6371000

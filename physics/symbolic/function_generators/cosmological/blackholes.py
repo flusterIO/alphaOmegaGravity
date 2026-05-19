@@ -1,9 +1,13 @@
-from physics.symbolic.variables import G, eo, q, c
+from physics.symbolic.variables import G, eo, q, c, M
 import sympy as smp
+
+
+def Rs(m=M):
+    return 2 * G * m / c**2
+
 
 # def radiusQ():
 #     return q**2 * G / (4 * smp.pi * eo * c**4)
-
 
 
 # def chargedBlackHoleRadiusRatio():

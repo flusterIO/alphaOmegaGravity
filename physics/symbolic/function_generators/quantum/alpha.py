@@ -6,4 +6,4 @@ def alphaTraditional():
     """
     The traditional representation of α
     """
-    return 1 / (4 * smp.pi) * e**2 / hbar * (mo / eo) **smp.Rational(1, 2)
+    return 1 / (4 * smp.pi) * e**2 / hbar * (mo / eo) ** smp.Rational(1, 2)

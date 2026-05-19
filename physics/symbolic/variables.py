@@ -31,6 +31,7 @@ from physics.values import unit_corrected_values
     hbar,
     lp,
     gamma,
+    au,
 ) = smp.symbols(
     [
         "G",
@@ -53,9 +54,10 @@ from physics.values import unit_corrected_values
         r"dt",
         r"\alpha",
         "h",
-        r"\hbar",
+        r"\bar{h}",
         r"\l_{p}",
         r"\gamma",
+        r"\mathbf{AU}",
     ]
 )
 
@@ -63,7 +65,7 @@ _c = smp.sqrt(1 / (mo * eo))
 _delta = -2 * G * M / R**3
 _n = mo / (4 * smp.pi)
 _omega = _delta ** smp.Rational(1, 3)
-_alpha = 1 / 2 * e**2 / h * smp.sqrt(mo / eo)
+_alpha = smp.Rational(1, 2) * e**2 / h * smp.sqrt(mo / eo)
 _mass_plank = smp.sqrt(h * c / (2 * smp.pi * G))
 _lp = smp.sqrt(hbar * G / c**3)
 
@@ -76,6 +78,7 @@ subs = [
     [eo, cd.eps0.base.tolist()],
     [e, cd.e.base.tolist()],
     [h, cd.h.value.tolist()],
+    [au, spc.au],
 ]
 
 subsSolar = [[R, ac.R_sun.base.tolist()], [M, ac.M_sun.base.tolist()]]

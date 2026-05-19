@@ -5,7 +5,7 @@ import astropy.constants.codata2010 as cd
 from physics.functions.relativity.velocity_related import vbarCosmological
 from physics.functions.theory.delta import delta
 from physics.functions.theory.omega import omega
-from physics.values.unit_utilities import metersPerSecondReduced
+from physics.values.unit_utilities import metersReduced
 import scipy.constants as spc
 
 
@@ -38,7 +38,7 @@ def alphaSolar():
     1 ± α = (1/2 δ)^1/3
     """
     _n = (1 / 2 * delta(M_sun.value, R_sun.value)) ** (1 / 3)
-    return [1 * metersPerSecondReduced + _n, 1 * metersPerSecondReduced - _n]
+    return [1 * metersReduced + _n, 1 * metersReduced - _n]
 
 
 def spinorApproximation():
