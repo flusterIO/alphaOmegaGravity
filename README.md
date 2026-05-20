@@ -1,5 +1,7 @@
 # Divergent Gravity
 
+### Results
+
 | derivation                                                | function                         | % error             |
 | :-------------------------------------------------------- | :------------------------------- | :------------------ |
 | cosmological velocity from local gravitational parameters | `vbarCosmological`               | Difficult to assess |
