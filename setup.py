@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="alpha_omega_gravity",
     packages=find_packages(),
-    version="0.1.0",
+    version="0.1.1",
     description="""Successfully unified gravity and electromagnetism.""",
     long_description_content_type="text/markdown",
     long_description="""
@@ -24,5 +24,5 @@ If you're willing to entertain thoughts that are bigger than what some others ca
 It reaches some controversial conclusions, but you tell me... are _this many_ alignments to _this degree_ of accuracy a coincidence? I think it's time to accept the impossible, and realize not only is the Universe potentially infinitely large, it may also be infinitely small with no limit on complexity for smaller systems. This follows logically if parameters like the speed of light (the speed of causality) dilates with the medium, as all experiments seem to indicate.
 
 Take a look at the `included_functions.md` file for a brief summary of the included functions, or take a look at [Fluster](https://flusterapp.com), an app I built to promote the model. There is a short summary of the model with a complete derivation available on the website. 
-    """
+    """,
 )
