@@ -33,10 +33,10 @@ But lasty, a closing thought experiment to justify the case for classical simult
 
 ### The Lighthouse & The Clocktower
 
-> It is from this principle that all of the math in this package can be derived.
+> It is from this principle that all of the math in this package can be derived. If the observer at rest and the observer in relative motion agree upon the time at which the observer reaches the clock tower, this model _has_ to be correct.
 
-Consider two observers, $A$ and $B$. Let $A$ and $B$ agree that $B$ should travel between two arbitrary points in space[^2], $p_1$ and $p_2$ at an **_agreed_** upon velocity $v$.
+Consider two observers, $A$ and $B$. Let $A$ and $B$ agree that $B$ should travel between two arbitrary points in space, $p_1$ and $p_2$ at an **_agreed_** upon velocity $v$.
 
 At $p_2$ place a time keeping device that remains visible from $p_1$. Allow that $A$ remains at rest relative to $p_1$, and very near $p_1$ while $B$ goes in motion (at an inertial pace) between $p_1$ and $p_2$.
 
-At what time does $A$ observe $B$ reach $p_2$? If the value is not $d/v$, but $\gamma d/v$, then $v \neq v_\prime$. The only possible solution that allows for Einstein's additional factor of $\gamma$ while allowing $A$ to remain in an unchanged state is that $d \to d\gamma$ in the coordinate system of the observer in relative motion, while $v \to v/\gamma$ in the coordinate system of the observer at relative rest to accomodate the change in spatial density.
+At what time does $A$ observe $B$ reach $p_2$? If the value is not $d/v$, but $\gamma d/v$, then $v \neq v_\prime$, _unless_ $d \to d \gamma$. The only possible solution that allows for Einstein's additional factor of $\gamma$ while allowing $A$ to remain in an unchanged state is that $d \to d\gamma$ in the coordinate system of the observer in relative motion, while $v \to v/\gamma$ in the coordinate system of the observer at relative rest to accomodate the change in spatial density.
