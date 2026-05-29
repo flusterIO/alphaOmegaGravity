@@ -11,6 +11,9 @@ def massDensityEquivalence():
     Returns the derived mass density and the traditional mass density in a tuple, s:
 
     `[derivedValue, traditionalValue]`
+
+    where the derived density is:
+    Φ / (G c α (2 − α))
     """
     a = alpha
     phi = smp.GoldenRatio

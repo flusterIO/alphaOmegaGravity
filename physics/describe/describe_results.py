@@ -3,7 +3,9 @@ import astropy.constants.iau2015 as ac
 from physics.functions.statistics.statistic_utils import percentDiff
 import astropy.units as u
 from physics.parameters import earthRadiusPolar, earthRadiusMean
-from physics.symbolic.function_generators.theory.em.current_equivalent import currentEquivalent
+from physics.symbolic.function_generators.theory.em.current_equivalent import (
+    currentEquivalent,
+)
 from physics.symbolic.function_generators.theory.em.electric_field_divergence import (
     electricFieldDivergence,
 )
@@ -46,12 +48,24 @@ def describe_results(write_output_to: Union[str, None] = None):
     md = massDensityEquivalence()
     rhoSubbed = md[0].subs(subs).subs([[alpha, spc.alpha]]).evalf()
     _delta = delta()
-    vbarAlphaDiff = percentDiff(vbarAlpha[0].subs(subs), (spc.alpha * (2 - spc.alpha))**3)
-    vbarKinematicDiff = percentDiff(cmbRelativeVelocities[2], vbarKinematicSubbed * u.m / u.s)
-    vbarKinematicDiff1 = percentDiff(cmbRelativeVelocities[0], vbarKinematicSubbed * u.m / u.s)
-    rhoDiff = percentDiff(ac.M_earth.value.tolist() / (4/3 * spc.pi * earthRadiusMean**3), rhoSubbed)
-    jDiff = abs(percentDiff(_delta.subs(subs) * _vbarCosmological.subs(subs), spc.golden_ratio))
-    currentEquivDiff = abs(percentDiff(currentEquivalent().subs(subs), spc.golden_ratio))
+    vbarAlphaDiff = percentDiff(
+        vbarAlpha[0].subs(subs), (spc.alpha * (2 - spc.alpha)) ** 3
+    )
+    vbarKinematicDiff = percentDiff(
+        cmbRelativeVelocities[2], vbarKinematicSubbed * u.m / u.s
+    )
+    vbarKinematicDiff1 = percentDiff(
+        cmbRelativeVelocities[0], vbarKinematicSubbed * u.m / u.s
+    )
+    rhoDiff = percentDiff(
+        ac.M_earth.value.tolist() / (4 / 3 * spc.pi * earthRadiusMean**3), rhoSubbed
+    )
+    jDiff = abs(
+        percentDiff(_delta.subs(subs) * _vbarCosmological.subs(subs), spc.golden_ratio)
+    )
+    currentEquivDiff = abs(
+        percentDiff(currentEquivalent().subs(subs), spc.golden_ratio)
+    )
     s = f"""# Divergent Gravity 
 
 This is a short summary generated at runtime, using CODATA and IAU values for all equations provided by the scipy & astropy packages.
@@ -309,8 +323,3 @@ And no, the dimensionality is not off. There is no such thing as time, and we ne
         p = Path(write_output_to)
         p.write_text(s)
         return s
-
-
-describe_results(
-    "/Users/bigsexy/Desktop/python/classes/physics/test_describe_output.md"
-)

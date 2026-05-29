@@ -35,3 +35,4 @@ from .geometry.sphere import sphereSurfaceArea, sphereVolume
 from .theory.delta import delta
 from physics.values.unit_utilities import *
 from physics.parameters import *
+from physics.describe.describe_results import describe_results

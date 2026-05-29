@@ -6,7 +6,7 @@ import sympy as smp
 
 def alphaEquivalence():
     """
-    1 ± √ω
+    1 ± √(1 - ω)
 
     This yields α and 2-α, satisfying the equation original equation:
 
@@ -18,7 +18,7 @@ def alphaEquivalence():
 
 def alphaSolar():
     """
-    (1/2 δ)^1/3
+    (1/2 δ)^1/3 as the 'spinor' approximation limits at ∛(1/2) for the dominant body in the system.
     """
     _n = (smp.Rational(1, 2) * delta()) ** smp.Rational(1 / 3)
     return [1 + _n, 1 - _n]
