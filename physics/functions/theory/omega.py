@@ -12,4 +12,4 @@ def omega(M: NumberLike = ac.M_earth, R: NumberLike = ac.R_earth, G: NumberLike 
     This gives geometry in which the inverse of a determinant of the derivative of gravity
     with respect to radius describes the dilation of the underlying coordinate system.
     """
-    return np.power(-delta(M, R, G), 1 / 3)
+    return np.power(delta(M, R, G), 1 / 3)

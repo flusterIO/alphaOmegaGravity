@@ -9,6 +9,13 @@ from physics.values.unit_utilities import metersReduced
 import scipy.constants as spc
 
 
+def Gamma(alpha=spc.alpha):
+    """
+    1 / (2 - α)
+    """
+    return 1 / (2 - alpha)
+
+
 def alphaIsolated():
     """
     Returns α as it would appear in the `alpha` equation after it was solved, instead of relying on inserting the observational value of α.

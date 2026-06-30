@@ -3,9 +3,11 @@ import scipy.constants as spc
 import astropy.units as u
 import astropy.constants.iau2015 as ac
 import astropy.constants.codata2010 as cd
+from sympy.vector import CoordSys3D
 
 from physics.values import unit_corrected_values
 
+S = CoordSys3D("S")
 
 (
     G,
@@ -32,6 +34,7 @@ from physics.values import unit_corrected_values
     lp,
     gamma,
     au,
+    v,
 ) = smp.symbols(
     [
         "G",
@@ -58,6 +61,7 @@ from physics.values import unit_corrected_values
         r"\l_{p}",
         r"\gamma",
         r"\mathbf{AU}",
+        "v",
     ]
 )
 

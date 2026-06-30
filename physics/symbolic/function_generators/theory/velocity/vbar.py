@@ -3,8 +3,13 @@ from physics.symbolic.function_generators.theory.gravity.gamma_equiv import (
     gravityGammaEquivalent,
 )
 from physics.symbolic.function_generators.theory.gravity.omega import omega
-from physics.symbolic.variables import alpha, M, R, c, gamma, G
+from physics.symbolic.variables import alpha, M, R, c, gamma, G, v
 import sympy as smp
+
+
+def gammaTraditional(_v = v, _c = c):
+    return 1 / smp.sqrt(1 - _v**2 / _c**2)
+
 
 
 def vFromGamma(_gamma=gamma):

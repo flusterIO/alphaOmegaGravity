@@ -1,4 +1,11 @@
-from physics.symbolic.variables import M, R, G
+from physics.symbolic.variables import M, R, G, alpha
+
+
+def Gamma(_alpha=alpha):
+    """
+    1 / (2 - α)
+    """
+    return 1 / (2 - _alpha)
 
 
 def gravityGammaEquivalent():

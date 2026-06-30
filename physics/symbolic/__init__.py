@@ -4,10 +4,19 @@ from .function_generators.theory.gravity.orbit import orbital_velocity_theory
 from .function_generators.theory.local_parameter_expansion import (
     beta_squared_equivalent,
 )
+from .function_generators.theory.em.magnetic_divergence import (
+    magneticDivergence,
+    magneticDivergenceIntegral,
+)
 from .function_generators.quantum.h import plankMass, plankLength
 from .function_generators.electromagnetism.aether import earthCEquivalentApproximation
 from .function_generators.theory.gravity.delta import delta
 from .function_generators.theory.gravity.omega import omega
+from .function_generators.theory.gravity.gamma_equiv import (
+    gravityGammaEquivalent,
+    gammaEquivTD,
+    Gamma,
+)
 from .function_generators.theory.quantum.alpha import alphaEquivalence, alphaSolar
 from .function_generators.quantum.alpha import alphaTraditional
 from .function_generators.newtonian.gravity import (
@@ -34,5 +43,8 @@ from .function_generators.theory.gravity.mass_density import (
     massDensityEquivalence,
     massDensityTraditional,
 )
-from .function_generators.theory.em.current_equivalent import currentEquivalent
+from .function_generators.theory.em.current_equivalent import (
+    currentEquivalent,
+    newtonsConstantFromAlpha,
+)
 from .function_generators.cosmological.blackholes import Rs
