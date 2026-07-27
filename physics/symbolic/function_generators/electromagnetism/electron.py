@@ -1,6 +1,6 @@
 import astropy.constants.codata2010 as cd
 import sympy as smp
-from physics.symbolic.variables import e, me, c,  eo
+from physics.symbolic.variables import e, me, c,  eo, alpha
 
 
 def electron_radius():
@@ -16,3 +16,7 @@ def electron_radius():
     Where $\\theta = \\sin{\\frac{1}{{R_e}}}^1$
     """
     return e**2 / ((me * c**2 * 8 * smp.pi * eo)) * 2
+
+
+def gFactor(_alpha = alpha):
+    return 2 + (_alpha / smp.pi) + (_alpha / smp.pi)**2 + (_alpha / smp.pi)**3 + (_alpha / smp.pi)**4

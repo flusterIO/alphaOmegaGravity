@@ -3,6 +3,14 @@ from physics.types.numberlike import NumberLike
 import astropy.constants.iau2015 as ac
 import astropy.constants.codata2010 as cd
 import numpy as np
+import scipy.constants as spc
+
+
+def gammaFromV(vel, c=spc.c):
+    """
+    Einstein's equation for gamma
+    """
+    return 1 / (1 - vel**2 / c**2) ** (1 / 2)
 
 
 def vFromGamma(gamma: NumberLike):

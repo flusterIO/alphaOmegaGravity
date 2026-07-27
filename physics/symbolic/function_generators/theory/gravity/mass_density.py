@@ -3,7 +3,7 @@ from physics.symbolic.variables import c, M, R, alpha, G
 
 
 def massDensityTraditional():
-    return M / (4 / 3 * smp.pi * R**3)
+    return M / (smp.Rational(4, 3) * smp.pi * R**3)
 
 
 def massDensityEquivalence():

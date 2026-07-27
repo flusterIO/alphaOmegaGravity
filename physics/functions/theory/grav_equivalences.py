@@ -10,6 +10,10 @@ def orbital_velocity_theory(M=ac.M_earth.value, R=ac.R_earth.value, G=cd.G.value
     return np.sqrt(G * M * (G * M + 2 * R**3)) / R**2 * u.m / u.s
 
 
+def dt_from_orbital_vel(M=ac.M_earth.value, R=ac.R_earth.value, G=cd.G.value):
+    return R**3 / (0.5 * G * M - R**3)
+
+
 def cOfV(v: NumberLike):
     """
     Since

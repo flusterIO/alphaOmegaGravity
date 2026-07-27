@@ -4,14 +4,18 @@ from physics.symbolic.variables import G, M, R
 import sympy as smp
 import astropy.constants.codata2010 as cd
 from physics.types.numberlike import NumberLike
+import sympy as smp
 
 
 def orbital_velocity():
-    return np.sqrt(G * M / R)
+    return smp.sqrt(G * M / R)
 
 
 def escape_velocity():
-    return np.sqrt(2 * G * M / R)
+    return smp.sqrt(2 * G * M / R)
+
+def dt_from_orbital_vel(r=R):
+    return r**3 * (1 / (smp.Rational(1, 2) * G * M  - r**3))
 
 
 def gravitationalPotentialEnergy():

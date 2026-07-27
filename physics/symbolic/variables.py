@@ -3,19 +3,33 @@ import scipy.constants as spc
 import astropy.units as u
 import astropy.constants.iau2015 as ac
 import astropy.constants.codata2010 as cd
-from sympy.vector import CoordSys3D
+from sympy.vector import CoordSys3D, matrix_to_vector
+from dataclasses import dataclass
 
 from physics.values import unit_corrected_values
 
 S = CoordSys3D("S")
+B = CoordSys3D("B")
+E = CoordSys3D("E")
+
+
+
+Ex = E.x
+Ey = E.y
+Ez = E.z
+Bx = B.x
+By = B.y
+Bz = B.z
 
 (
+    U,
     G,
     q,
     g,
     M,
     m,
     R,
+    Rearth,
     mo,
     eo,
     n,
@@ -37,12 +51,14 @@ S = CoordSys3D("S")
     v,
 ) = smp.symbols(
     [
+        "U",
         "G",
         "z",
         "g",
         "M",
         "m",
         "R",
+        r"R_{\oplus}",
         r"\mu_{0}",
         r"\epsilon_{0}",
         "n",
@@ -78,6 +94,7 @@ subs = [
     [G, spc.G],
     [M, ac.M_earth.base.tolist()],
     [R, ac.R_earth.base.tolist()],
+    [Rearth, ac.R_earth.base.tolist()],
     [mo, cd.mu0.base.tolist()],
     [eo, cd.eps0.base.tolist()],
     [e, cd.e.base.tolist()],
@@ -98,3 +115,31 @@ expand = [
     [lp, _lp],
     [hbar, h / (smp.pi * 2)],
 ]
+
+
+@dataclass
+class Subs:
+    subs = subs
+    subsSolar = subsSolar
+    expand = expand
+
+    def subsWithoutVariable(self, var):
+        items = []
+        for v in self.subs:
+            if v[0] != var:
+                items.append(v)
+        return items
+
+    def expandWithoutVariable(self, var):
+        items = []
+        for v in self.expand:
+            if v[0] != var:
+                items.append(v)
+        return items
+
+    def subsSolarWithoutVariable(self, var):
+        items = []
+        for v in self.subsSolar:
+            if v[0] != var:
+                items.append(v)
+        return items
