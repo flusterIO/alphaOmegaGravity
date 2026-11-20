@@ -2,9 +2,9 @@
 
 ## IMPORTANT
 
-Export fucking everything from `./physics/symbolic/__init__.py`, `./physics/plot_generators/__init__.py`, `./physics/symbolic/function_generators/electromagnetism/four_potential/__init__.py`, or `./physics/functions/__init__.py` according to whether the function is primarily symbolic, numeric, or plot related. Don't export shit from the nested `__init__.py` files..., and for fucks sake, dont' fucking remove any existing imports that are already there!
+Export everything from `./physics/symbolic/__init__.py`, `./physics/plot_generators/__init__.py`, `./physics/symbolic/function_generators/electromagnetism/four_potential/__init__.py`, or `./physics/functions/__init__.py` according to whether the function is primarily symbolic, numeric, or plot related. Don't export shit from the nested `__init__.py` files..., and for fucks sake, don't remove any existing imports that are already there!
 
-Use ONLY the tunnel files listed above. DO NOT EXPORT ANYTHING FROM ANYWHERE ELSE, AND DON"T MOVE ANY FUCKING IMPORTS.
+Use ONLY the tunnel files listed above. DO NOT EXPORT ANYTHING FROM ANYWHERE ELSE, AND DON"T MOVE ANY IMPORTS.
 
 ## Project overview
 

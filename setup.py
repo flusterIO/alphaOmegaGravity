@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 setup(
     name="alpha_omega_gravity",
     packages=find_packages(),
-    version="0.1.4",
-    description="""Successfully unified gravity and electromagnetism.""",
+    version="0.1.5",
+    description="""Classically simultaneous general relativity via an unwrapped Kaluza-Klein dimension.""",
     long_description_content_type="text/markdown",
     long_description="""
 # $\\alpha \\omega$ Gravity
@@ -16,7 +16,7 @@ Yes, that's $\\alpha$, as in the fine-structure constant. $\\omega$ is defined w
 
 ## What is this?
 
-This is my personal toolkit for the development of the theory of gravity described [here](https://zenodo.org/records/24280888). It might not work flawlessly as I've hardcoded some path's for my own use case as default parameters, but if the paper takes off and you want to see how it came to be, feel free to explore the code base. The perfect workflow for me was just a Ghostty/PtPython repl session, the plugin available [here](https://github.com/flusterIO/symbolic_math_repl), and this package.
+This is my personal toolkit for the development of the theory of gravity described [here](https://zenodo.org/records/24280888). It might not work flawlessly as I've hardcoded some paths for my own use case as default parameters, but if the paper takes off and you want to see how it came to be, feel free to explore the code base. The perfect workflow for me was just a Ghostty/PtPython repl session, the plugin available [here](https://github.com/flusterIO/symbolic_math_repl), and this package.
 
 ## What's the story behind this?
 
