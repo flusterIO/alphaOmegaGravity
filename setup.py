@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="alpha_omega_gravity",
     packages=find_packages(),
-    version="0.1.2",
+    version="0.1.3",
     description="""Successfully unified gravity and electromagnetism.""",
     long_description_content_type="text/markdown",
     long_description="""
