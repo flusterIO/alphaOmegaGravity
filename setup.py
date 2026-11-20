@@ -3,26 +3,28 @@ from setuptools import setup, find_packages
 setup(
     name="alpha_omega_gravity",
     packages=find_packages(),
-    version="0.1.3",
+    version="0.1.4",
     description="""Successfully unified gravity and electromagnetism.""",
     long_description_content_type="text/markdown",
     long_description="""
 # $\\alpha \\omega$ Gravity
 
+> Classically simultaneous General Relativity via an unwrapped Kaluza-Klein dimension
+
 Yes, that's $\\alpha$, as in the fine-structure constant. $\\omega$ is defined within the package, because I can't resist the urge to be grandiose. 
 
-5 years ago I gave up *everything* to focus on a modified model of relativity after realizing that Einstein 
-made an assumption that made far more sense before our observations that give us the Big Bang model.
 
-I quit my job, gave up my condo, became homeless, but now 5 years later I think I have it... successfully unified
-electromagnetism and gravity.
+## What is this?
 
-The only problem? It concludes that gravity is a repulsive force, and that the Earth is expanding _with_ the rest of the Universe.
+This is my personal toolkit for the development of the theory of gravity described [here](https://zenodo.org/records/24280888). It might not work flawlessly as I've hardcoded some path's for my own use case as default parameters, but if the paper takes off and you want to see how it came to be, feel free to explore the code base. The perfect workflow for me was just a Ghostty/PtPython repl session, the plugin available [here](https://github.com/flusterIO/symbolic_math_repl), and this package.
 
-If you're willing to entertain thoughts that are bigger than what some others can wrap their minds around, than this is the package for you.
+## What's the story behind this?
 
-It reaches some controversial conclusions, but you tell me... are _this many_ alignments to _this degree_ of accuracy a coincidence? I think it's time to accept the impossible, and realize not only is the Universe potentially infinitely large, it may also be infinitely small with no limit on complexity for smaller systems. This follows logically if parameters like the speed of light (the speed of causality) dilates with the medium, as all experiments seem to indicate.
+In the very early weeks of 2021 I was putting away my work for the night at around 3am when I put in some toast, grabbed a book I had sitting next to me, and flipped to a random page. The book was a collection of Einstein's lectures and papers, and the random line I flipped to was his famous quote about the length of the moving rod from "On The Electrodynamics Of Moving Bodies".
 
-Take a look at the `included_functions.md` file for a brief summary of the included functions, although the list is a little incomplete, or take a look at [Fluster](https://flusterapp.com/blog/by_path/on_the_gravitational_nature_of_time), an app I built to promote the model. There is a short summary of the model with a complete derivation available on the website. 
+Maybe it was just that it was out of context, I've read that line a dozen times before, but it occurred to me... Einstein's assumptions made far more sense before the observations that gave us the Big Bang model. I spent the next few weeks playing with the math before I realized that absolutely everything aligns with observation when you bind the Lorentz factor to gravitational acceleration and cosmic inflation, so I quit my job. I slept on the side of the road for 3 years and 4 months to the day, but I think I have something significant.
+
+If you found this package for some reason before you find the paper, you can take a read [here](https://zenodo.org/records/24280888).
+
     """,
 )
