@@ -1,5 +1,6 @@
-from physics.symbolic.variables import h, c, G
+from physics.symbolic.variables import h, c, G, hbar
 import sympy as smp
+
 
 def plankMass():
     """
@@ -7,7 +8,16 @@ def plankMass():
     \\sqrt{\\frac{h}{2 \\pi} \\frac{c}{G}}
     $$
     """
-    return smp.sqrt(h / (2 * smp.pi) * c / G)
+    return smp.sqrt(hbar * c / G)
+
+
+def plankTime():
+    return smp.sqrt(hbar * G / c**5)
+
 
 def plankLength():
-    return smp.sqrt(h / (2 * smp.pi) * G / c**3)
+    return c * plankTime()
+
+
+def plankEnergy():
+    return hbar / plankTime()

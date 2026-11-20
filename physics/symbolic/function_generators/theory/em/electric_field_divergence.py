@@ -1,4 +1,4 @@
-from physics.symbolic.function_generators.theory.gravity.delta import delta
+from physics.symbolic.function_generators.theory.gravity.delta import deltaExpanded
 from physics.symbolic.variables import c
 
 
@@ -14,4 +14,4 @@ def electricFieldDivergence():
     \\nabla \\cdot E = 2 c \\frac{GM}{R^3}
     $$
     """
-    return c * delta()
+    return c * deltaExpanded()

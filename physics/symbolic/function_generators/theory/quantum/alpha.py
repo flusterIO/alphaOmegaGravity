@@ -1,5 +1,5 @@
 from astropy.constants.iau2015 import M_sun
-from physics.symbolic.function_generators.theory.gravity.delta import delta
+from physics.symbolic.function_generators.theory.gravity.delta import deltaExpanded
 from physics.symbolic.function_generators.theory.gravity.omega import omega
 import sympy as smp
 

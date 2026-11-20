@@ -1,3 +1,4 @@
+from sympy.physics.vector import ReferenceFrame
 from sympy.vector import CoordSys3D
 import sympy as smp
 
@@ -18,21 +19,21 @@ def vecComponentFromIndex(s, idx=1, coordSys=S):
         print(f"Invalid index! Found {idx}")
 
 
-def coordSysComponentFromIndex(s: CoordSys3D, idx=1):
+def coordSysComponentFromIndex(s: ReferenceFrame, idx=1):
     if idx == 1:
-        return s.x
+        return s[0]
     if idx == 2:
-        return s.y
+        return s[1]
     if idx == 3:
-        return s.z
+        return s[2]
     else:
         print(f"Invalid index! Found {idx}")
 
 
-def radialDistanceFromOrigin(s: CoordSys3D):
-    return (s.x**2 + s.y**2 + s.z**2) ** (smp.Rational(1, 2))
+def radialDistanceFromOrigin(s: ReferenceFrame):
+    return (s[0] ** 2 + s[1] ** 2 + s[2] ** 2) ** (smp.Rational(1, 2))
 
 
 def radialUnitVec(s: CoordSys3D):
     mag = radialDistanceFromOrigin(s)
-    return (s.x * s.i + s.y * s.j + s.z * s.k) / mag
+    return (s[0] * s.i + s[1] * s.j + s[2] * s.k) / mag

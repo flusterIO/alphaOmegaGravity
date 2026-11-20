@@ -56,8 +56,13 @@ from physics.values.unit_utilities import *
 from physics.parameters import *
 from physics.describe.describe_results import describe_results
 from physics.functions.math_helpers.super_factorial import superFactorial
+from physics.functions.unit_conversions import gev_to_kg
 from physics.utility_functions.sympy_to_svg import sympyToSvg
-from physics.utility_functions.vector_generator_utils import xAxisUnitVec, randomUnitVec, randomUnitVec4d
+from physics.utility_functions.vector_generator_utils import (
+    axisUnitVec,
+    randomUnitVec,
+    randomUnitVec4d,
+)
 from physics.utility_functions.vector_utils import vectorMag, vec4dsSquared
 from physics.functions.tensor_generators.em import (
     LorentzMatrix,
@@ -68,5 +73,9 @@ from physics.functions.tensor_generators.gr import eta, metricTensor
 from physics.functions.tensor_generators.theory import (
     metricTensorTheory,
     metricTensorTheory4dAFrame,
-    metricTensorTheory4dBFrame
+    metricTensorTheory4dBFrame,
 )
+
+
+def averageOfMarginErrorTuple(data):
+    return (data[0] + data[1]) / 2

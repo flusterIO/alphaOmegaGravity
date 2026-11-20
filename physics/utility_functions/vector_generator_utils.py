@@ -2,8 +2,15 @@ import numpy as np
 import random
 
 
-def xAxisUnitVec():
-    return np.array([1, 0, 0])
+def axisUnitVec(axis=1):
+    if axis == 1:
+        return np.array([1, 0, 0])
+    if axis == 2:
+        return np.array([0, 1, 0])
+    if axis == 3:
+        return np.array([0, 0, 1])
+    else:
+        print("Bruh, it's a 3-vec.")
 
 
 def randomUnitVec():

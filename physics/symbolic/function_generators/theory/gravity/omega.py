@@ -1,6 +1,6 @@
-from physics.symbolic.function_generators.theory.gravity.delta import delta
+from physics.symbolic.function_generators.theory.gravity.delta import deltaExpanded
 import sympy as smp
 
 
 def omega():
-    return delta() ** smp.Rational(1, 3)
+    return deltaExpanded() ** smp.Rational(1, 3)

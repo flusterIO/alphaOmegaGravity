@@ -1,4 +1,4 @@
-from physics.symbolic.variables import alpha, au
+from physics.symbolic.variables import alpha, AU
 import sympy as smp
 
 
@@ -14,4 +14,4 @@ def earthCEquivalentApproximation():
     the sum of charge as applied to space itself, this function gives
     the equivalent of $c$ in the function above for our Earth based parameters.
     """
-    return 2 * smp.pi * au / (365.25 * 86400) / alpha
+    return 2 * smp.pi * AU / (365.25 * 86400) / alpha

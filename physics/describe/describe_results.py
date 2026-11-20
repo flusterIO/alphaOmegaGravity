@@ -9,7 +9,7 @@ from physics.symbolic.function_generators.theory.em.current_equivalent import (
 from physics.symbolic.function_generators.theory.em.electric_field_divergence import (
     electricFieldDivergence,
 )
-from physics.symbolic.function_generators.theory.gravity.delta import delta
+from physics.symbolic.function_generators.theory.gravity.delta import deltaExpanded
 from physics.symbolic.function_generators.theory.gravity.mass_density import (
     massDensityEquivalence,
 )

@@ -7,6 +7,10 @@ from physics.types.numberlike import NumberLike
 import sympy as smp
 
 
+def gravitationalAcceleration(m=M, r=R):
+    return G * m / r**2
+
+
 def orbital_velocity():
     return smp.sqrt(G * M / R)
 
@@ -14,8 +18,9 @@ def orbital_velocity():
 def escape_velocity():
     return smp.sqrt(2 * G * M / R)
 
+
 def dt_from_orbital_vel(r=R):
-    return r**3 * (1 / (smp.Rational(1, 2) * G * M  - r**3))
+    return r**3 * (1 / (smp.Rational(1, 2) * G * M - r**3))
 
 
 def gravitationalPotentialEnergy():
@@ -26,14 +31,17 @@ def gravitationalPotentialEnergy():
     """
     return G * M / R
 
+
 def centripitalAcceleration(v: smp.Symbol):
     """
     v²/R
     """
     return v**2 / R
 
+
 def periodOfCircularOrbit():
     return 2 * np.pi * np.sqrt(R**3 / (G * M))
+
 
 def centripitalForce(v: NumberLike):
     """

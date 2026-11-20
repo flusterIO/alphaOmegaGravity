@@ -2,14 +2,14 @@ from physics.symbolic.variables import M, R, G, alpha, e, h, mo, eo
 import sympy as smp
 
 
-def Gamma(_alpha=alpha):
+def _Gamma(_alpha=alpha):
     """
     1 / (2 - α)
     """
     return 1 / (2 - _alpha)
 
 
-def gravityGammaEquivalent(r=R,m=M, _G=G):
+def gammaBar(r=R, m=M, _G=G):
     """
     $$
     v = c \\sqrt{1 - 1 / (1 + g/R)^2}

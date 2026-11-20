@@ -1,15 +1,14 @@
-from physics.symbolic.function_generators.theory.gravity.delta import delta
+from physics.symbolic.function_generators.theory.gravity.delta import deltaExpanded
 from physics.symbolic.function_generators.theory.gravity.gamma_equiv import (
-    gravityGammaEquivalent,
+    gammaBar,
 )
 from physics.symbolic.function_generators.theory.gravity.omega import omega
 from physics.symbolic.variables import alpha, M, R, c, gamma, G, v
 import sympy as smp
 
 
-def gammaTraditional(_v = v, _c = c):
+def gammaTraditional(_v=v, _c=c):
     return 1 / smp.sqrt(1 - _v**2 / _c**2)
-
 
 
 def vFromGamma(_gamma=gamma):
@@ -27,7 +26,7 @@ def vbarCosmological():
     \\bar{v} = c \\sqrt{1 - \\frac{1}{\\left(1 + \\frac{g}{R}\\right)^2}}
     $$
     """
-    return vFromGamma(gravityGammaEquivalent())
+    return vFromGamma(gammaBar())
 
 
 def vbarKinematic() -> smp.Pow:

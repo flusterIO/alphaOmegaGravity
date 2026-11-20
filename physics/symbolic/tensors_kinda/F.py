@@ -1,15 +1,16 @@
 import numpy as np
+import sympy as smp
 from physics.symbolic.variables import Ex, Ey, Ez, Bx, By, Bz
 
 
 def F_sub_mu_nu():
-    return np.array(
+    return smp.Matrix(
         [[0, Ex, Ey, Ez], [-Ex, 0, Bz, -By], [-Ey, -Bz, 0, Bx], [-Ez, By, Bx, 0]]
     )
 
 
 def F_super_mu_nu():
-    return np.array(
+    return smp.Matrix(
         [[0, -Ex, -Ey, -Ez], [Ex, 0, Bz, -By], [Ey, -Bz, 0, Bx], [Ez, By, Bx, 0]]
     )
 

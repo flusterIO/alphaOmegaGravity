@@ -1,6 +1,10 @@
 import astropy.constants.codata2010 as cd
 import sympy as smp
-from physics.symbolic.variables import e, me, c,  eo, alpha
+from physics.symbolic.variables import e, me, c,  eo, alpha, hbar, m_plank
+
+
+def FeOverFg():
+    return alpha * (m_plank / me)**2
 
 
 def electron_radius():
@@ -15,7 +19,7 @@ def electron_radius():
 
     Where $\\theta = \\sin{\\frac{1}{{R_e}}}^1$
     """
-    return e**2 / ((me * c**2 * 8 * smp.pi * eo)) * 2
+    return alpha * hbar / (me * c)
 
 
 def gFactor(_alpha = alpha):
